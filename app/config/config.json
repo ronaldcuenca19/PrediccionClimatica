@@ -1,0 +1,29 @@
+{
+    "development":{
+        "username":"root",
+        "password":"ubuntu123",
+        "database":"bddPIS",
+        "host":"127.0.0.1",
+        "dialect":"mysql",
+        "operatorAliases":false
+    },
+
+    "staging":{
+        "username":"root",
+        "password":"ubuntu123",
+        "database":"bddPIS",
+        "host":"192.0.0.1",
+        "dialect":"mysql",
+        "operatorAliases":false
+    },
+
+    "production":{
+        "username":"root",
+        "password":"ubuntu123",
+        "database":"bddPIS",
+        "host":"127.0.0.1",
+        "dialect":"mysql",
+        "operatorAliases":false
+    }
+}
+
