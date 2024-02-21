@@ -7,6 +7,7 @@ class PersonaControl {
         var lista = await persona.findAll({
             include: [
                 { model: models.cuenta, as: "cuenta", attributes: ['correo','estado'] },
+                { model: models.rol, as: "rol", attributes: ['nombre'] }
             ],
             attributes: ['apellidos', ['external_id', 'id'], 'nombres', 'cedula', 'celular']
         });

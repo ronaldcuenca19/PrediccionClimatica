@@ -23,8 +23,7 @@ class CuentaControl {
                     if (cuentaA.clave === req.body.clave) {
                         var rolA = await rol.findOne({ where: {id: cuentaA.persona.id_rol}, attributes: ['nombre']});
                         const token_data = {
-                            rol: rolA.nombre,
-                            external: cuentaA.external,
+                            external: cuentaA.external_id,
                             check: true
                         };
                         require('dotenv').config();

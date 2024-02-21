@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(30),
             unique: true
         },
-        rol: {
-            type: DataTypes.ENUM(['MAESTRO', 'ESCLAVO']),
-            defaultValue: 'ESCLAVO'
-        },
         descripcion: {
             type: DataTypes.STRING(200),
             allowNull: false
@@ -17,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         estado: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        recurso: { 
+            type: DataTypes.STRING(100), 
+            defaultValue: '/' 
         },
         external_id: {
             type: DataTypes.UUID,

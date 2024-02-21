@@ -8,7 +8,7 @@ class MotaControl {
             include: [
                 { model: models.persona, as: "persona", attributes: ['apellidos', 'nombres'] },
             ],
-            attributes: ['ip', 'rol','descripcion', ['external_id', 'id'],'estado']
+            attributes: ['ip', 'descripcion', 'recurso', ['external_id', 'id'],'estado']
         });
         res.status(200);
         res.json({ msg: "OK", code: 200, datos: lista });
@@ -30,8 +30,8 @@ class MotaControl {
 
     async guardar(req, res) {
         if (req.body.hasOwnProperty('ip') &&
-            req.body.hasOwnProperty('rol') &&
             req.body.hasOwnProperty('descripcion') &&
+            req.body.hasOwnProperty('recurso') &&
             req.body.hasOwnProperty('persona')) {
                 var uuid = require('uuid');
                 var personaA = await persona.findOne({
@@ -48,14 +48,13 @@ class MotaControl {
                         res.json({ msg: "ERROR", tag: "IP Inválida", code: 400 });
                         return
                     }
-                    var estadoMota = (req.body.rol === 'MAESTRO') ? true : false; // Establecer el estado según el rol
                     var data = {
                         ip: req.body.ip,
                         external_id: uuid.v4(),
-                        rol: req.body.rol,
                         descripcion: req.body.descripcion,
+                        recurso: req.body.recurso,
                         id_persona: personaA.id,
-                        estado: estadoMota // Asignar el estado calculado
+                        estado: true // Asignar el estado calculado
                     }
                     let transaction = await models.sequelize.transaction();
                     try {
@@ -83,8 +82,8 @@ class MotaControl {
     async modificar(req, res) {
         const external = req.params.external;
         if (req.body.hasOwnProperty('ip') &&
-            req.body.hasOwnProperty('rol') &&
-            req.body.hasOwnProperty('descripcion')){
+            req.body.hasOwnProperty('descripcion')&&
+            req.body.hasOwnProperty('recurso')){
                 const lista = await mota.findOne({
                     where: { external_id: external },
                 });
@@ -97,8 +96,8 @@ class MotaControl {
                 var data = {
                     ip: req.body.ip,
                     external_id: lista.external_id,
-                    rol: req.body.rol,
                     descripcion: req.body.descripcion,
+                    recurso: req.body.recurso,
                 }
 
                 let transaction = await models.sequelize.transaction();
